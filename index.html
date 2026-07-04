@@ -937,22 +937,23 @@
 
                         <!-- Data Inputs -->
                         <div class="space-y-3">
-                            <input type="text" placeholder="Full name" required
+                            <input id="form-name" type="text" placeholder="Full name" required
                                 class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
                             
-                            <input type="email" placeholder="you@email.com" required
+                            <input id="form-email" type="email" placeholder="you@email.com" required
                                 class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
                             
-                            <input type="tel" placeholder="Phone number" required
+                            <input id="form-phone" type="tel" placeholder="Phone number" required
                                 class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
                             
-                            <input type="text" placeholder="Referral code (optional)" 
+                            <input id="form-ref" type="text" placeholder="Referral code (optional)" 
                                 class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
                         </div>
 
                         <!-- Execution CTA -->
-                        <button type="submit" 
+                        <button id="submit-btn" type="submit" 
                             class="w-full bg-[#1a73e8] hover:bg-[#1557b0] text-white text-[13px] font-bold py-3.5 px-4 rounded-[14px] flex items-center justify-center space-x-1.5 shadow-[0_4px_12px_rgba(26,115,232,0.15)] transition-all active:scale-[0.99] group mt-1">
+                            <p id="form-message" class="text-sm font-medium mt-3 text-center hidden"></p>
                             <span>Reserve my spot</span>
                             <svg class="w-4 h-4 transform transition-transform duration-150 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
@@ -1108,5 +1109,51 @@
     <!-- Project Architecture Script Reference -->
     <script src="js/main.js"></script>
 
-</body>
+
+    <!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const SUPABASE_URL = "https://zifsyipnyiamfncqohan.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_HzWO_dHdQIhb0lLDbmk37w_BfOJhBrG";
+        
+        // FIX: We changed the variable name here to supabaseClient
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('waitlist-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.innerText = "Reserving...";
+            submitBtn.disabled = true;
+
+            const fullName = document.getElementById('form-name').value;
+            const email = document.getElementById('form-email').value;
+            const phone = document.getElementById('form-phone').value;
+            const referralCode = document.getElementById('form-ref').value;
+
+            // FIX: We use supabaseClient here to talk to the database
+            const { data, error } = await supabaseClient
+                .from('waitlist')
+                .insert([
+                    { 
+                        full_name: fullName, 
+                        email: email, 
+                        phone: phone, 
+                        referral_code: referralCode || null 
+                    }
+                ]);
+
+            if (error) {
+                alert("Error: " + error.message);
+                submitBtn.innerText = "Reserve my spot";
+                submitBtn.disabled = false;
+            } else {
+                alert("Success! You are on the waitlist.");
+                document.getElementById('waitlist-form').reset();
+                submitBtn.innerText = "Spot Reserved! 🎉";
+            }
+        });
+    </script>
+    </body>
 </html>
