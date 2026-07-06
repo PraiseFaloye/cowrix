@@ -38,6 +38,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
+
+        /* ---------- Features Section Slide-In Base States ---------- */
+.feature-slide-phone {
+    opacity: 0;
+    transform: translateY(60px);
+    will-change: transform, opacity;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reaching final view destination smoothly */
+.feature-slide-phone.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover micro-interaction for desktop interactiveness */
+@media (min-width: 1024px) {
+    .feature-slide-phone.is-revealed:hover {
+        transform: translateY(-6px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .feature-slide-phone {
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
         /* Custom Focus Ring Styles for Clean Accessibility */
         *:focus-visible {
             outline: 2px solid #2563eb;
@@ -56,37 +87,33 @@
 <!-- ======================================
          FIXED CAPSULE NAVBAR (image_fe4d17.png)
          ====================================== -->
-    <header id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out px-4 sm:px-8 py-6">
-        <!-- Default state set to the pill capsule structure instantly preventing invisible/wacky reloads -->
-        <nav id="main-navbar" class="max-w-7xl mx-auto w-full flex items-center justify-between transition-all duration-300 ease-out px-8 py-3 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 shadow-[0_12px_34px_-10px_rgba(0,0,0,0.03)]">
+<header id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-out px-4 sm:px-8 py-6">
+    <nav id="main-navbar" class="max-w-7xl mx-auto w-full flex items-center justify-between transition-all duration-300 ease-out px-6 sm:px-8 py-3 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 shadow-[0_12px_34px_-10px_rgba(0,0,0,0.03)]">
+        
+<div class="flex items-center">
+    <a href="#home" class="flex items-center select-none shrink-0" aria-label="Cowrix Home">
+        <div class="relative w-9 h-8 flex items-center justify-center">
+            <img src="assets/c.svg" alt="" class="absolute w-[30px] h-auto object-contain pointer-events-none">
             
-            <!-- Interlocking C Custom Brand Logo from image_fe4d17.png -->
-            <a href="#home" class="flex items-center gap-2.5 text-xl font-black tracking-tight text-slate-900" aria-label="Cowrix Home">
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-[#4f46e5] to-[#2563eb] flex items-center justify-center text-white relative shadow-sm shadow-blue-600/20">
-                    <!-- Crisp accurate Interlocking geometric icon mimicry -->
-                    <svg class="w-4.5 h-4.5 text-white font-bold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8A4.5 4.5 0 1 0 16 16" />
-                        <path d="M12 8A4.5 4.5 0 1 1 12 16" class="opacity-80" />
-                    </svg>
-                </div>
-                <span class="font-bold tracking-tight text-[21px] text-[#0f172a]">cowrix<span class="text-[#2563eb]">.</span></span>
+            <img src="assets/x.svg" alt="" class="absolute w-[12px] h-auto object-contain pointer-events-none ml-[14px]">
+        </div>
+        <span class="font-bold tracking-tight text-[22px] text-[#0f172a] ml-1.5">cowrix<span class="text-[#2563eb]">.</span></span>
+    </a>
+</div>
+
+        <div class="hidden md:flex items-center gap-8 text-[16px] font-bold text-slate-600">
+            <a href="#features" class="hover:text-[#2563eb] transition-colors duration-150">Features</a>
+            <a href="#how" class="hover:text-[#2563eb] transition-colors duration-150">How it works</a>
+            <a href="#security" class="hover:text-[#2563eb] transition-colors duration-150">Security</a>
+            <a href="#faq" class="relative hover:text-[#2563eb] transition-colors duration-150 px-2 py-0.5">
+                <span>FAQ</span>
+                <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2563eb] rounded-full opacity-0"></span>
             </a>
+        </div>
 
-            <!-- Premium Minimalist Navigation Links -->
-            <div class="hidden md:flex items-center gap-8 text-[16.5px] font-bold text-black-500">
-                <a href="#features" class="hover:text-[#2563eb] transition-colors duration-150">Features</a>
-                <a href="#how" class="hover:text-[#2563eb] transition-colors duration-150">How it works</a>
-                <a href="#security" class="hover:text-[#2563eb] transition-colors duration-150">Security</a>
-                <a href="#faq" class="relative hover:text-[#2563eb] transition-colors duration-150 px-2 py-0.5">
-                    <span>FAQ</span>
-                    <!-- Active Micro Indicator matching image layout -->
-                    <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#2563eb] rounded-full opacity-0"></span>
-                </a>
-            </div>
-
-            <!-- Right Navbar CTA Pill Button -->
-            <div class="hidden md:flex items-center">
-                <a href="#waitlist" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-3 rounded-full text-[14.5px] font-bold transition-all inline-flex items-center gap-1.5 shadow-md shadow-blue-600/15 hover:shadow-lg hover:shadow-blue-600/20 active:scale-[0.98]">
+        <div class="flex items-center gap-4">
+            <div class="hidden md:block">
+                <a href="#waitlist" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-6 py-2.5 rounded-full text-[14.5px] font-bold transition-all inline-flex items-center gap-1.5 shadow-sm shadow-blue-600/15 hover:shadow-lg hover:shadow-blue-600/20 active:scale-[0.98]">
                     <span>Join waitlist</span>
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
@@ -94,177 +121,159 @@
                 </a>
             </div>
 
-            <!-- Mobile Menu Toggle Trigger -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 focus:outline-none" aria-expanded="false" aria-controls="mobile-dropdown">
+            <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 focus:outline-none flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors" aria-expanded="false" aria-controls="mobile-dropdown">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-        </nav>
-
-        <!-- Mobile Pill Menu Dropdown -->
-        <div id="mobile-dropdown" class="hidden md:hidden absolute left-4 right-4 top-24 bg-white/95 backdrop-blur-xl border border-slate-100 rounded-3xl shadow-xl p-6 transition-all duration-300">
-            <div class="flex flex-col gap-4 text-center font-bold text-[14px] text-slate-700">
-                <a href="#features" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">Features</a>
-                <a href="#how" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">How it works</a>
-                <a href="#security" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">Security</a>
-                <a href="#faq" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">FAQ</a>
-                <hr class="border-slate-100 my-1">
-                <a href="#waitlist" class="bg-[#2563eb] text-white py-3.5 rounded-xl font-bold inline-flex items-center justify-center gap-2 shadow-md">
-                    <span>Join waitlist</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
-                </a>
-            </div>
         </div>
-    </header>
-            <!-- ======================================
-         HERO SECTION (COMPACT)
-         ====================================== -->
-    <main id="home" class="relative min-h-[85vh] pt-28 pb-12 flex items-center overflow-hidden">
-        <div class="absolute top-[10%] right-[15%] w-[400px] h-[400px] rounded-full bg-blue-400/15 blur-[100px] pointer-events-none"></div>
 
-        <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            
-            <!-- Left Copy Column -->
-            <div class="lg:col-span-6 space-y-4 text-center lg:text-left">
-                <!-- Exact Geo Badge -->
-                <div class="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200/60 px-2.5 py-1 rounded-full text-[11px] font-semibold text-slate-600">
-                    <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span>
-                    <span>Launching soon</span>
-                    <span class="text-slate-300">•</span>
-                    <span class="text-slate-700">Nigeria ➔ Africa</span>
-                </div>
-                
-                <!-- Headline -->
-                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-                    The smarter way to <br>
-                    <span class="text-brand-600">move money.</span>
-                </h1>
-                
-                <!-- Exact Body Text -->
-                <p class="text-sm sm:text-base text-slate-500 max-w-md mx-auto lg:mx-0 leading-relaxed">
-                    Send, request, scan and pay, instantly. Cowrix is the modern wallet built for Africa, with bank-direct payments, USDT support and a few seconds of magic on every tap.
-                </p>
+    </nav>
 
-                <!-- CTAs -->
-                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3 pt-1">
-                    <a href="#waitlist" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-sm transition-all inline-flex items-center justify-center gap-1.5">
-                        <span>Join the Waitlist</span>
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
-                    </a>
-                    <a href="#how" class="border border-slate-200 hover:border-slate-300 bg-white text-slate-700 px-5 py-3 rounded-full text-sm font-semibold transition-all text-center">
-                        See how it works
-                    </a>
-                </div>
-
-                <!-- Waitlist Social Proof Counter -->
-                <div class="pt-2 flex items-center justify-center lg:justify-start gap-3">
-                    <div class="flex -space-x-2">
-                        <div class="w-6 h-6 rounded-full border border-white bg-indigo-500 shadow-sm"></div>
-                        <div class="w-6 h-6 rounded-full border border-white bg-purple-500 shadow-sm"></div>
-                        <div class="w-6 h-6 rounded-full border border-white bg-cyan-400 shadow-sm"></div>
-                        <div class="w-6 h-6 rounded-full border border-white bg-brand-600 shadow-sm"></div>
-                    </div>
-                    <p class="text-xs text-slate-500 font-medium">
-                        <span class="text-slate-900 font-bold">5,238+</span> already on the waitlist
-                    </p>
-                </div>
-            </div>
-
-            <!-- Right Phone Layout (Scaled down to look incredibly precise) -->
-            <div class="lg:col-span-6 relative flex justify-center items-center h-[420px] lg:h-[480px]">
-                
-                <!-- Left Phone -->
-                <div class="absolute left-4 w-[175px] h-[360px] bg-white border-[5px] border-slate-900 rounded-[28px] shadow-xl hidden sm:block z-10">
-                    <div class="p-3 pt-5 text-center space-y-3">
-                        <div class="text-[9px] font-bold text-slate-400 font-mono">5:13</div>
-                        <h4 class="text-xs font-bold text-slate-900 tracking-tight">Scan, Pay, Done!</h4>
-                        <p class="text-[9px] text-slate-400 leading-tight">Make payments in seconds by simply scanning a QR code.</p>
-                        <div class="w-16 h-16 border border-dashed border-brand-500/30 rounded-xl mx-auto flex items-center justify-center bg-brand-50/50">
-                            <svg class="w-8 h-8 text-brand-600" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 01-1.125-1.125v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5zM16.875 13.5a1.125 1.125 0 011.125 1.125v1.5a1.125 1.125 0 01-1.125 1.125h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a1.125 1.125 0 011.125-1.125h1.5z" /></svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Center Main Dashboard Phone -->
-                <div class="absolute z-20 w-[205px] h-[420px] bg-white border-[6px] border-slate-950 rounded-[32px] shadow-2xl overflow-hidden transform lg:translate-x-6">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-3.5 bg-slate-950 rounded-b-xl z-30"></div>
-                    <div class="p-3 pt-5 space-y-3">
-                        <div class="flex justify-between items-center text-[9px] font-bold text-slate-800 px-1">
-                            <span>5:13</span>
-                            <div class="flex gap-0.5">📊 🔋</div>
-                        </div>
-                        <div class="flex items-center gap-1.5 px-0.5">
-                            <div class="w-5 h-5 rounded-full bg-amber-100 text-[10px] flex items-center justify-center">👨🏾‍💻</div>
-                            <span class="text-[10px] font-bold text-slate-800">Hello, Adebayo</span>
-                        </div>
-                        <div class="bg-brand-600 rounded-xl p-3 text-white space-y-2 shadow-sm">
-                            <div class="flex justify-between text-[8px] opacity-90">
-                                <div>Wallet Balance:<br><span class="text-xs font-bold">₦******* 👁️</span></div>
-                                <div class="text-right">USDT:<br><span class="text-[9px] font-bold bg-white/20 px-1 rounded">0</span></div>
-                            </div>
-                            <div class="grid grid-cols-3 gap-1.5 text-center text-[8px] font-medium pt-0.5">
-                                <div class="bg-white/10 py-1 rounded-md">📤 Send</div>
-                                <div class="bg-white/10 py-1 rounded-md">📥 Req</div>
-                                <div class="bg-white/20 py-1 rounded-md font-bold">💳 Fund</div>
-                            </div>
-                        </div>
-                        <div class="space-y-1">
-                            <div class="flex justify-between text-[9px] font-bold text-slate-800">
-                                <span>Transactions</span>
-                                <span class="text-brand-600 text-[8px]">See all</span>
-                            </div>
-                            <div class="space-y-1 text-[8px]">
-                                <div class="flex justify-between items-center bg-slate-50 p-1.5 rounded-lg">
-                                    <span class="font-medium text-slate-600">Isaiah Adebayo</span>
-                                    <span class="text-red-500 font-bold">-₦50,000</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Phone -->
-                <div class="absolute right-4 w-[175px] h-[360px] bg-white border-[5px] border-slate-900 rounded-[28px] shadow-xl hidden md:block z-10 opacity-70">
-                    <div class="p-3 pt-5 space-y-3">
-                        <div class="text-[9px] font-bold text-slate-400 text-center font-mono">5:13</div>
-                        <div class="bg-slate-50 p-2 rounded-lg border border-slate-100 space-y-1">
-                            <span class="text-[8px] font-bold text-slate-400 block uppercase">Request</span>
-                            <div class="text-xs font-black text-slate-900">₦11,300.00</div>
-                        </div>
-                        <div class="bg-brand-600 text-white text-center py-1.5 rounded-lg text-[10px] font-bold">
-                            Accept Request
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+    <div id="mobile-dropdown" class="hidden md:hidden absolute left-4 right-4 top-24 bg-white/95 backdrop-blur-xl border border-slate-100 rounded-3xl shadow-xl p-6 transition-all duration-300">
+        <div class="flex flex-col gap-4 text-center font-bold text-[14px] text-slate-700">
+            <a href="#features" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">Features</a>
+            <a href="#how" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">How it works</a>
+            <a href="#security" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">Security</a>
+            <a href="#faq" class="py-2 hover:bg-slate-50 rounded-xl transition-colors">FAQ</a>
+            <hr class="border-slate-100 my-1">
+            <a href="#waitlist" class="bg-[#2563eb] text-white py-3.5 rounded-xl font-bold inline-flex items-center justify-center gap-2 shadow-md">
+                <span>Join waitlist</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
+            </a>
         </div>
-    </main>
-    
+    </div>
+</header>
+
+
+
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; }
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+</head>
+<body class="bg-[#f8fafc]">
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
+<style>
+  .phone-shadow { box-shadow: 0 40px 80px -20px rgba(15,23,42,0.25), 0 10px 24px -8px rgba(15,23,42,0.12); }
+  .side-phone-shadow { box-shadow: 0 24px 48px -16px rgba(15,23,42,0.15); }
+</style>
+
 <!-- ======================================
-         TRACTION COUNTER METRICS SECTION (COMPACT)
-         ====================================== -->
-    <section class="max-w-5xl mx-auto px-6 mb-16">
-        <div class="bg-white border border-slate-100 rounded-[24px] shadow-[0_12px_32px_-12px_rgba(0,0,0,0.02)] px-6 py-6 sm:py-8 grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-2 text-center items-center">
-            <div class="space-y-0.5">
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">5,238+</p>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">On the waitlist</p>
-            </div>
-            <div class="space-y-0.5 lg:border-l lg:border-slate-100">
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">&lt;5s</p>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Avg. Transfer</p>
-            </div>
-            <div class="space-y-0.5 md:border-l md:border-slate-100">
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">256-bit</p>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Encryption</p>
-            </div>
-            <div class="space-y-0.5 lg:border-l lg:border-slate-100">
-                <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">24/7</p>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Fraud Monitoring</p>
-            </div>
+     HERO SECTION (compact desktop sizing)
+     ====================================== -->
+<main id="home" class="relative pt-28 pb-12 lg:pt-32 lg:pb-16 flex items-center overflow-hidden bg-[#f8fafc]">
+  <!-- Ambient backdrop glow -->
+  <div class="absolute top-[0%] right-[10%] w-[500px] h-[500px] rounded-full bg-blue-600/[0.06] blur-[140px] pointer-events-none"></div>
+  <div class="absolute bottom-[0%] left-[5%] w-[350px] h-[350px] rounded-full bg-indigo-500/[0.05] blur-[120px] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto w-full px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-6 relative z-10">
+
+    <!-- LEFT COLUMN: Copy -->
+    <div class="w-full lg:w-auto lg:max-w-[420px] shrink-0 space-y-6 text-center lg:text-left flex flex-col items-center lg:items-start px-6 lg:px-0">
+
+      <!-- Launch badge -->
+      <div class="inline-flex items-center gap-1.5 bg-white border border-slate-200/80 px-3 py-1.5 rounded-full text-[12px] font-semibold text-slate-600 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        <span>Launching soon</span>
+        <span class="text-slate-300">•</span>
+        <span class="text-slate-700">Nigeria → Africa</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-[42px] lg:text-[40px] xl:text-[46px] font-black tracking-tight text-[#0f172a] leading-[1.1]">
+        The smarter way to
+        <span class="block text-blue-600">move money.</span>
+      </h1>
+
+      <!-- Description -->
+      <p class="text-[14px] sm:text-[15px] text-slate-500 max-w-sm leading-relaxed">
+        Send, request, scan and pay, instantly. Cowrix is the modern wallet built for Africa, with bank-direct payments, USDT support and a few seconds of magic on every tap.
+      </p>
+
+      <!-- CTAs -->
+      <div class="w-full flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 pt-2">
+        <a href="#waitlist" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-[14px] font-bold shadow-md shadow-blue-600/20 transition-all inline-flex items-center justify-center gap-2 whitespace-nowrap">
+          <span>Join the Waitlist</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path></svg>
+        </a>
+        <a href="#how" class="border border-slate-200 hover:border-slate-300 bg-white text-slate-700 px-6 py-3 rounded-full text-[14px] font-bold transition-all text-center shadow-sm hover:bg-slate-50">
+          See how it works
+        </a>
+      </div>
+
+      <!-- Social proof -->
+      <div class="pt-1 flex items-center gap-3">
+        <div class="flex -space-x-2">
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-indigo-500 shadow-sm"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-purple-500 shadow-sm"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-cyan-400 shadow-sm"></div>
+          <div class="w-7 h-7 rounded-full border-2 border-white bg-blue-600 shadow-sm"></div>
         </div>
-    </section>
+        <p class="text-[14px] text-slate-500 font-medium tracking-tight">
+          <span class="text-[#0f172a] font-bold">5,238+</span> already on the waitlist
+        </p>
+      </div>
+    </div>
+
+    <!-- RIGHT: Phone mockups, balanced next to the text -->
+    <div class="w-full lg:w-auto flex items-center justify-center overflow-visible pt-4 lg:pt-0">
+      <div class="flex items-center shrink-0">
+
+        <!-- PHONE 1 (left, behind) -->
+        <div class="w-[125px] sm:w-[155px] lg:w-[165px] xl:w-[180px] shrink-0 translate-x-6 sm:translate-x-8 lg:translate-x-9 -rotate-6 scale-[0.92] opacity-85 z-10 transition-transform duration-300">
+          <div class="overflow-hidden aspect-[9/19]">
+            <img src="assets/1.png" alt="Scan & Pay Interface" class="w-full h-full object-contain">
+          </div>
+        </div>
+
+        <!-- PHONE 2 (center, front) -->
+        <div class="w-[140px] sm:w-[170px] lg:w-[180px] xl:w-[195px] shrink-0 scale-100 z-30 relative phone-shadow bg-white rounded-[28px] border-[4px] border-slate-950 -mx-2 sm:-mx-2.5">
+          <div class="absolute top-2 left-1/2 -translate-x-1/2 w-14 h-3 bg-slate-950 rounded-full z-40"></div>
+          <div class="rounded-[22px] overflow-hidden aspect-[9/19] relative bg-white">
+            <img src="assets/2.png" alt="Cowrix Central Wallet Dashboard" class="w-full h-full object-cover">
+          </div>
+        </div>
+
+        <!-- PHONE 3 (right, behind, may bleed past the edge) -->
+        <div class="w-[125px] sm:w-[155px] lg:w-[165px] xl:w-[180px] shrink-0 -translate-x-6 sm:-translate-x-8 lg:-translate-x-9 rotate-6 scale-[0.92] opacity-85 z-10 transition-transform duration-300">
+          <div class="overflow-hidden aspect-[9/19]">
+            <img src="assets/3.png" alt="Payment Settlement Request" class="w-full h-full object-contain">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
 <!-- ======================================
          FEATURES GRID SECTION (EXACT MATCH)
          ====================================== -->
@@ -367,250 +376,287 @@
         </div>
     </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/3.4.1/tailwind.min.js"></script>
+
 
 <!-- ======================================
-         HOW IT WORKS SECTION (RECONSTRUCTED)
-         ====================================== -->
-    <section id="how" class="py-24 bg-[#fafbfc] relative overflow-hidden font-sans antialiased">
-        
-        <!-- Premium Subtle Grid Background Pattern from image_fed497.png -->
-        <div class="absolute inset-0 opacity-[0.4] pointer-events-none" 
-             style="background-size: 30px 30px; background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);">
+     HOW IT WORKS SECTION (RESIZED CARDS)
+     ====================================== -->
+<section id="how" class="py-24 bg-[#fafbfc] relative overflow-hidden font-sans antialiased">
+
+    <!-- Subtle grid background -->
+    <div class="absolute inset-0 opacity-[0.4] pointer-events-none"
+         style="background-size: 30px 30px; background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);">
+    </div>
+
+    <div class="relative max-w-5xl mx-auto px-6 z-10">
+
+        <!-- Header -->
+        <div class="text-center space-y-4 mb-14">
+            <div class="inline-flex items-center bg-[#eef2ff] border border-[#e0e7ff] px-4 py-1 rounded-full text-[11px] font-bold text-[#2563eb] tracking-wider uppercase">
+                How it works
+            </div>
+            <h2 class="text-3xl md:text-[38px] font-black text-[#0f172a] tracking-tight leading-none">
+                Three steps to your new wallet.
+            </h2>
         </div>
 
-        <div class="relative max-w-6xl mx-auto px-6 z-10">
-            
-            <!-- Header Section -->
-            <div class="text-center space-y-4 mb-16">
-                <div class="inline-flex items-center bg-[#eef2ff] border border-[#e0e7ff] px-4 py-1 rounded-full text-[11px] font-bold text-[#2563eb] tracking-wider uppercase">
-                    How it works
-                </div>
-                <h2 class="text-3xl md:text-[42px] font-black text-[#0f172a] tracking-tight leading-none">
-                    Three steps to your new wallet.
-                </h2>
-            </div>
+        <!-- Steps Wrapper -->
+        <div id="steps-animate-container" class="relative">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 relative z-10 justify-items-center md:justify-items-stretch">
 
-            <!-- Steps Grid Container -->
-            <div id="steps-animate-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
                 <!-- Step 01 -->
-                <div class="step-animated-card opacity-0 translate-y-6 transition-all duration-700 ease-out bg-white border border-[#e2e8f0] rounded-[28px] p-8 md:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.06)] hover:border-slate-300 hover:-translate-y-1 transform group">
-                    <div class="w-12 h-12 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[14px] font-black mb-8 shadow-md shadow-blue-600/10 transition-transform group-hover:scale-105">
-                        01
+                <div class="step-animated-card w-full max-w-md md:max-w-none bg-white border border-[#e2e8f0] rounded-[24px] p-5 sm:p-6 md:p-7 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_24px_48px_-12px_rgba(15,23,42,0.06)] hover:border-slate-300 md:hover:-translate-y-1 transition-all duration-300 flex flex-row md:flex-col gap-4 md:gap-0 items-start">
+                    
+                    <!-- Responsive Badge -->
+                    <div class="step-badge relative w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[13px] font-black md:mb-6 shrink-0 shadow-md shadow-blue-600/10">
+                        <span class="step-badge-ring absolute inset-0 rounded-full border-2 border-[#2563eb]"></span>
+                        <span class="step-badge-ring step-badge-ring-2 absolute inset-0 rounded-full border-2 border-[#4f7bf0]"></span>
+                        <span class="relative">01</span>
                     </div>
-                    <h3 class="text-[18px] font-black text-[#0f172a] mb-3 tracking-tight">
-                        Create your account
-                    </h3>
-                    <p class="text-[13.5px] text-slate-500 font-normal leading-relaxed">
-                        Sign up in under 60 seconds with just your email and phone.
-                    </p>
+                    
+                    <!-- Content Block -->
+                    <div class="space-y-1.5 md:space-y-2">
+                        <h3 class="text-[16px] sm:text-[17px] font-black text-[#0f172a] tracking-tight">
+                            Create your account
+                        </h3>
+                        <p class="text-[13px] text-slate-500 font-normal leading-relaxed">
+                            Sign up in under 60 seconds with just your email and phone.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Step 02 -->
-                <div class="step-animated-card opacity-0 translate-y-6 transition-all duration-700 ease-out bg-white border border-[#e2e8f0] rounded-[28px] p-8 md:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.06)] hover:border-slate-300 hover:-translate-y-1 transform group">
-                    <div class="w-12 h-12 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[14px] font-black mb-8 shadow-md shadow-blue-600/10 transition-transform group-hover:scale-105">
-                        02
+                <div class="step-animated-card w-full max-w-md md:max-w-none bg-white border border-[#e2e8f0] rounded-[24px] p-5 sm:p-6 md:p-7 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_24px_48px_-12px_rgba(15,23,42,0.06)] hover:border-slate-300 md:hover:-translate-y-1 transition-all duration-300 flex flex-row md:flex-col gap-4 md:gap-0 items-start">
+                    
+                    <!-- Responsive Badge -->
+                    <div class="step-badge relative w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[13px] font-black md:mb-6 shrink-0 shadow-md shadow-blue-600/10">
+                        <span class="step-badge-ring absolute inset-0 rounded-full border-2 border-[#2563eb]"></span>
+                        <span class="step-badge-ring step-badge-ring-2 absolute inset-0 rounded-full border-2 border-[#4f7bf0]"></span>
+                        <span class="relative">02</span>
                     </div>
-                    <h3 class="text-[18px] font-black text-[#0f172a] mb-3 tracking-tight">
-                        Link bank or fund wallet
-                    </h3>
-                    <p class="text-[13.5px] text-slate-500 font-normal leading-relaxed">
-                        Connect your Nigerian bank or top up instantly.
-                    </p>
+                    
+                    <!-- Content Block -->
+                    <div class="space-y-1.5 md:space-y-2">
+                        <h3 class="text-[16px] sm:text-[17px] font-black text-[#0f172a] tracking-tight">
+                            Link bank or fund wallet
+                        </h3>
+                        <p class="text-[13px] text-slate-500 font-normal leading-relaxed">
+                            Connect your Nigerian bank or top up instantly.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Step 03 -->
-                <div class="step-animated-card opacity-0 translate-y-6 transition-all duration-700 ease-out bg-white border border-[#e2e8f0] rounded-[28px] p-8 md:p-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.06)] hover:border-slate-300 hover:-translate-y-1 transform group">
-                    <div class="w-12 h-12 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[14px] font-black mb-8 shadow-md shadow-blue-600/10 transition-transform group-hover:scale-105">
-                        03
+                <div class="step-animated-card w-full max-w-md md:max-w-none bg-white border border-[#e2e8f0] rounded-[24px] p-5 sm:p-6 md:p-7 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.02)] hover:shadow-[0_24px_48px_-12px_rgba(15,23,42,0.06)] hover:border-slate-300 md:hover:-translate-y-1 transition-all duration-300 flex flex-row md:flex-col gap-4 md:gap-0 items-start">
+                    
+                    <!-- Responsive Badge -->
+                    <div class="step-badge relative w-10 h-10 rounded-full bg-[#2563eb] flex items-center justify-center text-white text-[13px] font-black md:mb-6 shrink-0 shadow-md shadow-blue-600/10">
+                        <span class="step-badge-ring absolute inset-0 rounded-full border-2 border-[#2563eb]"></span>
+                        <span class="step-badge-ring step-badge-ring-2 absolute inset-0 rounded-full border-2 border-[#4f7bf0]"></span>
+                        <span class="relative">03</span>
                     </div>
-                    <h3 class="text-[18px] font-black text-[#0f172a] mb-3 tracking-tight">
-                        Send, scan, and pay
-                    </h3>
-                    <p class="text-[13.5px] text-slate-500 font-normal leading-relaxed">
-                        Move money to anyone, anywhere, instantly.
-                    </p>
+                    
+                    <!-- Content Block -->
+                    <div class="space-y-1.5 md:space-y-2">
+                        <h3 class="text-[16px] sm:text-[17px] font-black text-[#0f172a] tracking-tight">
+                            Send, scan, and pay
+                        </h3>
+                        <p class="text-[13px] text-slate-500 font-normal leading-relaxed">
+                            Move money to anyone, anywhere, instantly.
+                        </p>
+                    </div>
                 </div>
 
             </div>
         </div>
+    </div>
 
-        <!-- Self-Executing Contextual Script: Placed inside section so it doesn't fail -->
-        <script>
-            (function() {
-                const targetBox = document.getElementById('steps-animate-container');
-                if (!targetBox) return;
-                
-                const stepItems = targetBox.querySelectorAll('.step-animated-card');
-                
-                // Fallback: If browser doesn't support IntersectionObserver, show them immediately
-                if (!('IntersectionObserver' in window)) {
-                    stepItems.forEach(card => card.classList.remove('opacity-0', 'translate-y-6'));
-                    return;
-                }
+    <style>
+        .step-animated-card {
+            opacity: 0;
+            transform: translateY(20px);
+            will-change: transform, opacity;
+            transition: opacity 0.5s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .step-animated-card.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            stepItems.forEach((card, index) => {
-                                setTimeout(() => {
-                                    card.classList.remove('opacity-0', 'translate-y-6');
-                                    card.classList.add('opacity-100', 'translate-y-0');
-                                }, index * 180); // Controlled sequence delay gap
-                            });
-                            observer.unobserve(entry.target);
+        .step-badge {
+            transform: scale(0.6);
+            opacity: 0;
+            will-change: transform, opacity;
+            transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        opacity 0.25s ease;
+        }
+        .step-badge.is-visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .step-badge-ring {
+            transform: scale(1);
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+        .step-badge-ring.pulse {
+            animation: stepRingPulse 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .step-badge-ring-2.pulse {
+            animation: stepRingPulse 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
+        }
+        @keyframes stepRingPulse {
+            0%   { transform: scale(0.9); opacity: 0.8; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .step-animated-card, .step-badge, .step-badge-ring {
+                transition: none !important;
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+
+    <script>
+        (function() {
+            const container = document.getElementById('steps-animate-container');
+            if (!container) return;
+
+            const cards  = Array.from(container.querySelectorAll('.step-animated-card'));
+            const badges = Array.from(container.querySelectorAll('.step-badge'));
+            const stepDelay = 150; 
+
+            function pulseRings(badgeEl) {
+                badgeEl.querySelectorAll('.step-badge-ring').forEach(ring => ring.classList.add('pulse'));
+            }
+
+            function revealSequence() {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('is-visible');
+                        const badge = badges[index];
+                        if (badge) {
+                            badge.classList.add('is-visible');
+                            setTimeout(() => pulseRings(badge), 120);
                         }
-                    });
-                }, { threshold: 0.1 });
+                    }, index * stepDelay);
+                });
+            }
 
-                observer.observe(targetBox);
-            })();
-        </script>
-    </section>
+            if (!('IntersectionObserver' in window)) {
+                cards.forEach(c => c.classList.add('is-visible'));
+                badges.forEach(b => b.classList.add('is-visible'));
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        revealSequence();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            observer.observe(container);
+        })();
+    </script>
+</section>
 
 <!-- ======================================
          ECOSYSTEM SHOWCASE SECTION (OPTIMIZED DIMENSIONS)
          ====================================== -->
-    <section id="ecosystem" class="relative py-20 bg-[#fafbfc] overflow-hidden border-t border-slate-100">
-        <!-- Blueprint Grid Background from image_fc0474.png -->
-        <div class="absolute inset-0 opacity-[0.35] pointer-events-none" 
-             style="background-image: linear-gradient(#e4e9f2 1px, transparent 1px), linear-gradient(90deg, #e4e9f2 1px, transparent 1px); background-size: 44px 44px; background-position: center top;">
+<section id="ecosystem" class="relative py-20 bg-[#fafbfc] overflow-hidden border-t border-slate-100">
+    <div class="absolute inset-0 opacity-[0.35] pointer-events-none" 
+         style="background-image: linear-gradient(#e4e9f2 1px, transparent 1px), linear-gradient(90deg, #e4e9f2 1px, transparent 1px); background-size: 44px 44px; background-position: center top;">
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="text-center max-w-2xl mx-auto mb-14 space-y-2.5">
+            <div class="inline-flex items-center bg-[#eef2ff] border border-[#e0e7ff] px-3.5 py-0.5 rounded-full text-[10px] font-bold text-[#3b82f6] uppercase tracking-wider">
+                A Whole Payments Ecosystem
+            </div>
+            <h2 class="text-3xl font-extrabold tracking-tight text-[#0f172a]">
+                One app for every kind of payment.
+            </h2>
+            <p class="text-xs text-[#64748b] font-normal leading-relaxed max-w-xl mx-auto">
+                Friends, merchants, bills, banks, crypto, Cowrix connects them all in one beautifully simple interface.
+            </p>
         </div>
 
-        <div class="max-w-6xl mx-auto px-6 relative z-10">
-            <!-- Section Header -->
-            <div class="text-center max-w-2xl mx-auto mb-14 space-y-2.5">
-                <div class="inline-flex items-center bg-[#eef2ff] border border-[#e0e7ff] px-3.5 py-0.5 rounded-full text-[10px] font-bold text-[#3b82f6] uppercase tracking-wider">
-                    A Whole Payments Ecosystem
-                </div>
-                <h2 class="text-3xl font-extrabold tracking-tight text-[#0f172a]">
-                    One app for every kind of payment.
-                </h2>
-                <p class="text-xs text-[#64748b] font-normal leading-relaxed max-w-xl mx-auto">
-                    Friends, merchants, bills, banks, crypto, Cowrix connects them all in one beautifully simple interface.
-                </p>
-            </div>
-
-            <!-- Balanced Columns: Layout Matching image_fc0474.png Exactly -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+            
+            <div class="lg:col-span-5 flex items-center justify-center -space-x-4 relative overflow-visible py-4">
                 
-                <!-- Left Column: Compact Phone Mockups Stack (5 Cols) -->
-                <div class="lg:col-span-5 flex items-end justify-center space-x-3.5">
-                    
-                    <!-- Phone 1: Send to Email -->
-                    <div class="w-[125px] aspect-[9/19] bg-white border-[3px] border-[#0f172a] rounded-[22px] shadow-lg overflow-hidden p-2 flex flex-col justify-between relative transition-all duration-300 hover:-translate-y-1">
-                        <!-- Dynamic Island Notch -->
-                        <div class="w-10 h-3 bg-[#0f172a] rounded-b-md absolute top-0 left-1/2 transform -translate-x-1/2 z-20"></div>
-                        <div class="flex justify-between items-center text-[6px] font-bold text-slate-400 px-0.5 pt-0.5">
-                            <span>9:15</span>
-                            <div class="flex items-center space-x-0.5"><span class="scale-75">📶</span><span class="scale-75">🔋</span></div>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center items-center text-center px-0.5">
-                            <div class="w-5 h-5 rounded-full bg-slate-50 mb-1.5 border border-slate-100 flex items-center justify-center text-[8px]">👤</div>
-                            <span class="text-[5px] font-bold text-slate-400 uppercase tracking-tight scale-90 block">Send to Email</span>
-                            <div class="bg-slate-50 border border-slate-100/80 rounded-md py-1.5 px-1 w-full my-2 text-center shadow-sm">
-                                <span class="text-[9px] font-extrabold text-slate-800">₦150,600.00</span>
-                            </div>
-                        </div>
-                        <div class="w-full bg-[#0b57d0] py-1 rounded-[6px] text-center text-[6.5px] font-bold text-white mb-0.5">
-                            Send Money
-                        </div>
-                    </div>
-
-                    <!-- Phone 2: Request Center (Center Highlighted) -->
-                    <div class="w-[125px] aspect-[9/19] bg-white border-[3px] border-[#0f172a] rounded-[22px] shadow-xl overflow-hidden p-2 flex flex-col justify-between relative transition-all duration-300 hover:-translate-y-1">
-                        <div class="w-10 h-3 bg-[#0f172a] rounded-b-md absolute top-0 left-1/2 transform -translate-x-1/2 z-20"></div>
-                        <div class="flex justify-between items-center text-[6px] font-bold text-slate-400 px-0.5 pt-0.5">
-                            <span>9:15</span>
-                            <div class="flex items-center space-x-0.5"><span class="scale-75">📶</span><span class="scale-75">🔋</span></div>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center items-center text-center px-0.5">
-                            <span class="text-[5px] font-medium text-slate-400 block scale-95">Payment Request Received</span>
-                            <div class="text-[10px] font-extrabold text-slate-900 my-1">₦11,300.00</div>
-                            <span class="text-[4.5px] text-slate-400 block max-w-[80px] leading-tight scale-90">Request from Emmanuel Okafor</span>
-                        </div>
-                        <div class="space-y-1 mb-0.5">
-                            <div class="w-full bg-[#0b57d0] py-1 rounded-[6px] text-center text-[6.5px] font-bold text-white">
-                                Accept Request
-                            </div>
-                            <div class="w-full bg-slate-50 border border-slate-100 py-0.5 rounded-[6px] text-center text-[5.5px] font-medium text-slate-400">
-                                Cancel
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Phone 3: Scan, Pay, Done! -->
-                    <div class="w-[125px] aspect-[9/19] bg-white border-[3px] border-[#0f172a] rounded-[22px] shadow-lg overflow-hidden p-2 flex flex-col justify-between relative transition-all duration-300 hover:-translate-y-1">
-                        <div class="w-10 h-3 bg-[#0f172a] rounded-b-md absolute top-0 left-1/2 transform -translate-x-1/2 z-20"></div>
-                        <div class="flex justify-between items-center text-[6px] font-bold text-slate-400 px-0.5 pt-0.5">
-                            <span>9:15</span>
-                            <div class="flex items-center space-x-0.5"><span class="scale-75">📶</span><span class="scale-75">🔋</span></div>
-                        </div>
-                        <div class="flex-1 flex flex-col justify-center items-center text-center px-1">
-                            <span class="text-[5.5px] font-bold text-slate-800 tracking-tight block mb-1.5">Scan, Pay, Done!</span>
-                            <div class="w-8 h-8 border border-dashed border-[#0b57d0]/40 rounded-full flex items-center justify-center bg-[#eef2ff]">
-                                <span class="text-[8px] text-[#0b57d0] font-mono font-bold">⚃</span>
-                            </div>
-                        </div>
-                        <div class="w-full bg-[#0b57d0] py-1 rounded-[6px] text-center text-[6.5px] font-bold text-white mb-0.5">
-                            Let's get started
-                        </div>
-                    </div>
-
+                <div class="w-[115px] sm:w-[130px] shrink-0 drop-shadow-md select-none pointer-events-none transform transition-all duration-300 hover:-translate-y-1 relative z-0">
+                    <img src="assets/Overlay (2).svg" alt="Send to Email" class="w-full h-auto object-contain">
                 </div>
 
-                <!-- Right Column: Micro-Interaction List Items (7 Cols) -->
-                <div class="lg:col-span-7 flex flex-col space-y-3.5">
-                    
-                    <!-- Feature Row 1 -->
-                    <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
-                        <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
-                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:scale-95" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Real-time everywhere</h3>
-                            <p class="text-[11px] text-[#64748b] font-normal">Settle in seconds, not days.</p>
-                        </div>
-                    </div>
+                <div class="w-[125px] sm:w-[140px] shrink-0 drop-shadow-2xl select-none pointer-events-none transform transition-all duration-300 hover:-translate-y-1 relative z-10">
+                    <img src="assets/Overlay (1).svg" alt="Request Center" class="w-full h-auto object-contain">
+                </div>
 
-                    <!-- Feature Row 2 -->
-                    <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
-                        <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
-                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">QR-first commerce</h3>
-                            <p class="text-[11px] text-[#64748b] font-normal">Pay any merchant with a quick scan.</p>
-                        </div>
-                    </div>
-
-                    <!-- Feature Row 3 -->
-                    <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
-                        <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
-                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 018.716 6.747M12 3a9.004 9.004 0 00-8.716 6.747M3.75 12h16.5"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Naira and USDT</h3>
-                            <p class="text-[11px] text-[#64748b] font-normal">Hold both, swap when you need to.</p>
-                        </div>
-                    </div>
-
-                    <!-- Feature Row 4 -->
-                    <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
-                        <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
-                            <svg class="w-4 h-4 transition-transform duration-400 group-hover:[transform:rotateY(180deg)]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751A11.956 11.956 0 0112 2.714z"></path></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Privacy by default</h3>
-                            <p class="text-[11px] text-[#64748b] font-normal">Your data is yours. Always encrypted.</p>
-                        </div>
-                    </div>
-
+                <div class="w-[115px] sm:w-[130px] shrink-0 drop-shadow-md select-none pointer-events-none transform transition-all duration-300 hover:-translate-y-1 relative z-0">
+                    <img src="assets/Overlay.svg" alt="Scan, Pay, Done!" class="w-full h-auto object-contain">
                 </div>
 
             </div>
+
+            <div class="lg:col-span-7 flex flex-col space-y-3.5">
+                
+                <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
+                    <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:scale-95" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Real-time everywhere</h3>
+                        <p class="text-[11px] text-[#64748b] font-normal">Settle in seconds, not days.</p>
+                    </div>
+                </div>
+
+                <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
+                    <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 013.75 9.375v-4.5zM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0113.5 9.375v-4.5z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">QR-first commerce</h3>
+                        <p class="text-[11px] text-[#64748b] font-normal">Pay any merchant with a quick scan.</p>
+                    </div>
+                </div>
+
+                <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
+                    <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9s2.015-9 4.5-9m0 0a9.004 9.004 0 018.716 6.747M12 3a9.004 9.004 0 00-8.716 6.747M3.75 12h16.5"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Naira and USDT</h3>
+                        <p class="text-[11px] text-[#64748b] font-normal">Hold both, swap when you need to.</p>
+                    </div>
+                </div>
+
+                <div class="group bg-white border border-slate-200/70 rounded-[18px] p-4 flex items-center space-x-4 shadow-[0_2px_10px_rgba(0,0,0,0.01)] hover:border-[#3b82f6]/30 hover:shadow-[0_10px_20px_-8px_rgba(59,130,246,0.06)] transition-all duration-300 ease-out cursor-pointer">
+                    <div class="w-9 h-9 rounded-full bg-[#eef2ff] flex items-center justify-center text-[#0b57d0] shrink-0 transition-all duration-300 group-hover:bg-[#0b57d0] group-hover:text-white group-hover:scale-105">
+                        <svg class="w-4 h-4 transition-transform duration-400 group-hover:path" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751A11.956 11.956 0 0112 2.714z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="text-xs font-bold text-[#0f172a] tracking-tight transition-colors duration-200 group-hover:text-[#0b57d0]">Privacy by default</h3>
+                        <p class="text-[11px] text-[#64748b] font-normal">Your data is yours. Always encrypted.</p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
 <!-- ======================================
          SECURITY SHOWCASE SECTION (HIGH CONTRAST)
          ====================================== -->
@@ -864,142 +910,127 @@
     </script>
     
     
-<!-- ======================================
-         UNIFIED WAITLIST & COUNTDOWN CARD
-         ====================================== -->
-    <section id="waitlist" class="py-24 bg-[#fafbfc] flex items-center justify-center font-sans antialiased">
-        
-        <!-- Single Unified Card Outer Container Block matching image_fcecb1.png architectural bounds -->
-        <div class="w-full max-w-[1060px] mx-auto px-6 md:px-8">
-            <div class="bg-white border border-[#e2e8f0] rounded-[36px] p-8 md:p-14 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.06),0_4px_16px_-4px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-6">
+<section id="waitlist" class="py-16 md:py-24 bg-[#fafbfc] flex items-center justify-center font-sans antialiased">
+    
+    <div class="w-full max-w-[1060px] mx-auto px-4 sm:px-6 md:px-8">
+        <div class="bg-white border border-[#e2e8f0] rounded-[28px] md:rounded-[36px] p-6 sm:p-8 md:p-14 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.06),0_4px_16px_-4px_rgba(0,0,0,0.01)] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-6">
+            
+            <div class="w-full lg:max-w-[480px] flex flex-col space-y-6 md:space-y-8 text-center lg:text-left items-center lg:items-start">
                 
-                <!-- Left Content Pane: Text Copy & Inner Countdown Container -->
-                <div class="w-full lg:max-w-[480px] flex flex-col space-y-8">
-                    
-                    <!-- Premium Accent Micro-Badge -->
-                    <div class="self-start inline-flex items-center space-x-2 bg-[#e8f0fe] border border-[#d2e3fc] px-3.5 py-1 rounded-full text-[11px] font-bold text-[#1a73e8] tracking-wide">
-                        <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 11.5a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0zm-7.5-4a.75.75 0 00-.75.75v3.5c0 .414.336.75.75.75h2.5a.75.75 0 000-1.5h-1.75V8.25a.75.75 0 00-.75-.75z"/>
-                        </svg>
-                        <span>Almost here</span>
-                    </div>
-
-                    <!-- Header Matrix -->
-                    <div class="space-y-4">
-                        <h2 class="text-[36px] lg:text-[42px] font-black text-[#0f172a] tracking-tight leading-[1.12]">
-                            The next-generation<br>wallet is almost<br>here.
-                        </h2>
-                        <p class="text-[13.5px] text-slate-500 font-normal leading-relaxed max-w-[400px]">
-                            Join thousands waiting to experience faster, smarter, more beautiful payments.
-                        </p>
-                    </div>
-
-                    <!-- Dark Countdown Pod inside the main wrapper canvas -->
-                    <div class="w-full max-w-[440px] bg-[#050914] rounded-[24px] p-5 text-center border border-[#0f172a] shadow-inner">
-                        <div class="text-[9px] uppercase tracking-[0.15em] font-bold text-slate-500 mb-4">
-                            Launching In
-                        </div>
-                        
-                        <!-- 4-Column Metric Counter -->
-                        <div class="grid grid-cols-4 gap-2.5">
-                            <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-4 flex flex-col items-center">
-                                <span id="days" class="text-2xl font-black text-white tracking-tight">29</span>
-                                <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Days</span>
-                            </div>
-                            <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-4 flex flex-col items-center">
-                                <span id="hours" class="text-2xl font-black text-white tracking-tight">23</span>
-                                <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Hours</span>
-                            </div>
-                            <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-4 flex flex-col items-center">
-                                <span id="minutes" class="text-2xl font-black text-white tracking-tight">57</span>
-                                <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Mins</span>
-                            </div>
-                            <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-4 flex flex-col items-center">
-                                <span id="seconds" class="text-2xl font-black text-white tracking-tight">56</span>
-                                <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Secs</span>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="inline-flex items-center space-x-2 bg-[#e8f0fe] border border-[#d2e3fc] px-3.5 py-1 rounded-full text-[11px] font-bold text-[#1a73e8] tracking-wide">
+                    <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 11.5a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0zm-7.5-4a.75.75 0 00-.75.75v3.5c0 .414.336.75.75.75h2.5a.75.75 0 000-1.5h-1.75V8.25a.75.75 0 00-.75-.75z"/>
+                    </svg>
+                    <span>Almost here</span>
                 </div>
 
-                <!-- Right Content Pane: Form Stack Interface Input Frame -->
-                <div class="w-full lg:w-[380px] flex flex-col justify-center">
-                    <form id="waitlist-form" class="space-y-4" onsubmit="event.preventDefault();">
-                        
-                        <!-- Header Label -->
-                        <div class="flex items-center space-x-2 pb-1">
-                            <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.964-1.584A6.062 6.062 0 016 18.719m12 0a5.903 5.903 0 01-3.296-1.71 3 3 0 00-3.01 0A5.904 5.904 0 016 18.722m12 0V1.75M6 18.72V1.75"></path>
-                            </svg>
-                            <span class="text-[10.5px] font-black text-[#1a73e8] uppercase tracking-[0.08em]">Join the private waitlist</span>
-                        </div>
+                <div class="space-y-4">
+                    <h2 class="text-[28px] sm:text-[34px] lg:text-[42px] font-black text-[#0f172a] tracking-tight leading-tight lg:leading-[1.12]">
+                        The next-generation <br class="hidden lg:block">wallet is almost <br class="hidden lg:block">here.
+                    </h2>
+                    <p class="text-[13px] sm:text-[13.5px] text-slate-500 font-normal leading-relaxed max-w-[400px] mx-auto lg:mx-0">
+                        Join thousands waiting to experience faster, smarter, more beautiful payments.
+                    </p>
+                </div>
 
-                        <!-- Data Inputs -->
-                        <div class="space-y-3">
-                            <input id="form-name" type="text" placeholder="Full name" required
-                                class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
-                            
-                            <input id="form-email" type="email" placeholder="you@email.com" required
-                                class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
-                            
-                            <input id="form-phone" type="tel" placeholder="Phone number" required
-                                class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
-                            
-                            <input id="form-ref" type="text" placeholder="Referral code (optional)" 
-                                class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
+                <div class="w-full max-w-[440px] bg-[#050914] rounded-[24px] p-4 sm:p-5 text-center border border-[#0f172a] shadow-inner">
+                    <div class="text-[9px] uppercase tracking-[0.15em] font-bold text-slate-500 mb-3.5">
+                        Launching In
+                    </div>
+                    
+                    <div class="grid grid-cols-4 gap-2 sm:gap-2.5">
+                        <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-3.5 sm:py-4 flex flex-col items-center">
+                            <span id="days" class="text-xl sm:text-2xl font-black text-white tracking-tight">29</span>
+                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Days</span>
                         </div>
-
-                        <!-- Execution CTA -->
-                        <button id="submit-btn" type="submit" 
-                            class="w-full bg-[#1a73e8] hover:bg-[#1557b0] text-white text-[13px] font-bold py-3.5 px-4 rounded-[14px] flex items-center justify-center space-x-1.5 shadow-[0_4px_12px_rgba(26,115,232,0.15)] transition-all active:scale-[0.99] group mt-1">
-                            <p id="form-message" class="text-sm font-medium mt-3 text-center hidden"></p>
-                            <span>Reserve my spot</span>
-                            <svg class="w-4 h-4 transform transition-transform duration-150 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-                            </svg>
-                        </button>
-
-                        <!-- Legal Meta Fine Print -->
-                        <div class="text-center text-[10.5px] text-slate-400 font-normal leading-relaxed pt-1.5">
-                            Free forever for early users · No spam · Unsubscribe anytime
+                        <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-3.5 sm:py-4 flex flex-col items-center">
+                            <span id="hours" class="text-xl sm:text-2xl font-black text-white tracking-tight">23</span>
+                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Hours</span>
                         </div>
-                    </form>
+                        <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-3.5 sm:py-4 flex flex-col items-center">
+                            <span id="minutes" class="text-xl sm:text-2xl font-black text-white tracking-tight">57</span>
+                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Mins</span>
+                        </div>
+                        <div class="bg-[#0c1224] border border-white/[0.04] rounded-[16px] py-3.5 sm:py-4 flex flex-col items-center">
+                            <span id="seconds" class="text-xl sm:text-2xl font-black text-white tracking-tight">56</span>
+                            <span class="text-[8px] font-bold text-slate-500 uppercase tracking-widest mt-1">Secs</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>
+
+            <div class="w-full lg:w-[380px] flex flex-col justify-center">
+                <form id="waitlist-form" class="space-y-4" onsubmit="event.preventDefault();">
+                    
+                    <div class="flex items-center justify-center lg:justify-start space-x-2 pb-1">
+                        <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.964-1.584A6.062 6.062 0 016 18.719m12 0a5.903 5.903 0 01-3.296-1.71 3 3 0 00-3.01 0A5.904 5.904 0 016 18.722m12 0V1.75M6 18.72V1.75"></path>
+                        </svg>
+                        <span class="text-[10.5px] font-black text-[#1a73e8] uppercase tracking-[0.08em]">Join the private waitlist</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <input id="form-name" type="text" placeholder="Full name" required
+                            class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
+                        
+                        <input id="form-email" type="email" placeholder="you@email.com" required
+                            class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
+                        
+                        <input id="form-phone" type="tel" placeholder="Phone number" required
+                            class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
+                        
+                        <input id="form-ref" type="text" placeholder="Referral code (optional)" 
+                            class="w-full bg-white border border-[#e2e8f0] rounded-[14px] px-4 py-3.5 text-[13px] text-[#0f172a] placeholder-slate-400 font-medium transition-colors focus:outline-none focus:border-[#1a73e8] hover:border-slate-300">
+                    </div>
+
+                    <p id="form-message" class="text-xs font-medium text-center hidden mb-2"></p>
+
+                    <button id="submit-btn" type="submit" 
+                        class="w-full bg-[#1a73e8] hover:bg-[#1557b0] text-white text-[13px] font-bold py-3.5 px-4 rounded-[14px] flex items-center justify-center space-x-1.5 shadow-[0_4px_12px_rgba(26,115,232,0.15)] transition-all active:scale-[0.99] group">
+                        <span>Reserve my spot</span>
+                        <svg class="w-4 h-4 transform transition-transform duration-150 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                        </svg>
+                    </button>
+
+                    <div class="text-center text-[10.5px] text-slate-400 font-normal leading-relaxed pt-1.5">
+                        Free forever for early users · No spam · Unsubscribe anytime
+                    </div>
+                </form>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Interactive Counter Logic Framework -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 29);
-            targetDate.setHours(targetDate.getHours() + 23);
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 29);
+        targetDate.setHours(targetDate.getHours() + 23);
 
-            function runClock() {
-                const now = new Date().getTime();
-                const diff = targetDate - now;
+        function runClock() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
 
-                if (diff <= 0) return;
+            if (diff <= 0) return;
 
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-                document.getElementById('days').innerText = String(d).padStart(2, '0');
-                document.getElementById('hours').innerText = String(h).padStart(2, '0');
-                document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-                document.getElementById('seconds').innerText = String(s).padStart(2, '0');
-            }
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
 
-            setInterval(runClock, 1000);
-            runClock();
-        });
-    </script>
-
+        setInterval(runClock, 1000);
+        runClock();
+    });
+</script>
 <!-- ======================================
          FOOTER SECTION
          ====================================== -->
@@ -1011,14 +1042,16 @@
                 
                 <!-- Left Side: Brand Meta Info -->
                 <div class="md:col-span-6 flex flex-col space-y-5">
-                    <!-- Brand Logo Block -->
-                    <div class="flex items-center space-x-2">
-                        <div class="w-6 h-6 rounded-full bg-[#1a73e8] flex items-center justify-center shadow-sm">
-                            <span class="text-white font-black text-[11px] uppercase tracking-tighter">C</span>
-                        </div>
-                        <span class="text-base font-black text-[#0f172a] tracking-tight">cowrix<span class="text-[#1a73e8]">.</span></span>
-                    </div>
-                    
+<!-- Brand Logo Block -->
+<div class="flex items-center">
+    <a href="#home" class="flex items-center select-none shrink-0" aria-label="Cowrix Home">
+        <div class="relative w-9 h-8 flex items-center justify-center">
+            <img src="assets/c.svg" alt="" class="absolute w-[30px] h-auto object-contain pointer-events-none">
+            <img src="assets/x.svg" alt="" class="absolute w-[12px] h-auto object-contain pointer-events-none ml-[14px]">
+        </div>
+        <span class="font-bold tracking-tight text-[22px] text-[#0f172a] ml-1.5">cowrix<span class="text-[#2563eb]">.</span></span>
+    </a>
+</div>
                     <!-- Meta Subtext description -->
                     <p class="text-[13px] text-slate-500 font-normal leading-relaxed max-w-[320px]">
                         The modern wallet built for Africa. Send, scan and pay, instantly, securely, beautifully.
@@ -1108,6 +1141,109 @@
 
     <!-- Project Architecture Script Reference -->
     <script src="js/main.js"></script>
+
+<!-- Hero Carousel Script -->
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const track = document.getElementById("hero-carousel-track");
+    const cards = document.querySelectorAll(".hero-phone-card");
+    const dots = document.querySelectorAll("#carousel-indicators button");
+    
+    let activeIndex = 1; 
+    let isDesktop = window.innerWidth >= 768; // Aligns with Tailwind's 'md' breakpoint rule
+
+    function syncView() {
+        isDesktop = window.innerWidth >= 768;
+        if (isDesktop) {
+            cards.forEach((card, idx) => {
+                card.classList.remove("scale-100", "scale-[0.88]", "opacity-100", "opacity-40", "z-30", "z-10");
+                if (idx === 1) card.classList.add("scale-100", "opacity-100", "z-30");
+                else if (idx === 0) card.classList.add("scale-[0.88]", "opacity-50", "translate-x-10", "z-10");
+                else card.classList.add("scale-[0.88]", "opacity-50", "-translate-x-10", "z-10");
+            });
+        } else {
+            updateMobileCardStates(activeIndex);
+        }
+    }
+
+    function updateMobileCardStates(activeIndexTarget) {
+        cards.forEach((card) => {
+            const slideIdx = parseInt(card.getAttribute("data-slide"));
+            card.classList.remove("scale-100", "scale-[0.88]", "opacity-100", "opacity-40", "z-30", "z-10", "translate-x-10", "-translate-x-10");
+            
+            if (slideIdx === activeIndexTarget) {
+                card.classList.add("scale-100", "opacity-100", "z-30");
+            } else {
+                card.classList.add("scale-[0.88]", "opacity-40", "z-10");
+            }
+        });
+
+        dots.forEach((dot, idx) => {
+            if (idx === activeIndexTarget) {
+                dot.setAttribute("aria-selected", "true");
+                dot.classList.replace("bg-slate-300", "bg-blue-600");
+            } else {
+                dot.setAttribute("aria-selected", "false");
+                dot.classList.replace("bg-blue-600", "bg-slate-300");
+            }
+        });
+    }
+
+    function scrollToSlide(index) {
+        if (isDesktop || !track) return;
+        const targetCard = document.querySelector(`[data-slide="${index}"]`);
+        if (targetCard) {
+            const scrollPosition = targetCard.offsetLeft - (track.offsetWidth / 2) + (targetCard.offsetWidth / 2);
+            track.scrollTo({ left: scrollPosition, behavior: "smooth" });
+            updateMobileCardStates(index);
+            activeIndex = index;
+        }
+    }
+
+    dots.forEach((dot) => {
+        dot.addEventListener("click", (e) => {
+            const targetIdx = parseInt(e.currentTarget.getAttribute("data-index"));
+            scrollToSlide(targetIdx);
+        });
+    });
+
+    let scrollTimeout;
+    track.addEventListener("scroll", () => {
+        if (isDesktop) return;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const trackCenter = track.scrollLeft + (track.offsetWidth / 2);
+            let closestIndex = activeIndex;
+            let minDistance = Infinity;
+
+            cards.forEach((card) => {
+                const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                const distance = Math.abs(trackCenter - cardCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = parseInt(card.getAttribute("data-slide"));
+                }
+            });
+
+            if (closestIndex !== activeIndex) {
+                updateMobileCardStates(closestIndex);
+                activeIndex = closestIndex;
+            }
+        }, 60);
+    });
+
+    window.addEventListener("resize", syncView);
+    
+    // Initial Setup
+    setTimeout(() => {
+        syncView();
+        if (!isDesktop) scrollToSlide(1); 
+    }, 150);
+});  
+
+
+
+</script>
 
 
     <!-- Supabase SDK -->

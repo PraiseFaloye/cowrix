@@ -14,38 +14,58 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. MOBILE MENU DRAWER ENGINE
+   1. MOBILE MENU DRAWER ENGINE (Fixed Tracking & Click-Out States)
    ========================================================================== */
 function initNavigationDrawer() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileDropdown = document.getElementById('mobile-dropdown');
     const menuIcon = document.getElementById('menu-icon');
-    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    // Selects ANY anchor element inside the mobile dropdown wrapper automatically
+    const mobileLinks = mobileDropdown ? mobileDropdown.querySelectorAll('a') : [];
 
-    if (!mobileMenuBtn || !mobileDropdown) return;
+    if (!mobileMenuBtn || !mobileDropdown || !menuIcon) return;
 
-    const toggleMenu = () => {
-        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-        mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-        mobileDropdown.classList.toggle('hidden');
-        
-        // Transform SVG Hamburger Asset Path dynamically 
-        if (!isExpanded) {
-            menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-        } else {
-            menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-        }
+    // Standardized closing routine execution block
+    const closeMenu = () => {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileDropdown.classList.add('hidden');
+        menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); // Returns to Hamburger path
     };
 
-    mobileMenuBtn.addEventListener('click', toggleMenu);
+    // Standardized opening routine execution block
+    const openMenu = () => {
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileDropdown.classList.remove('hidden');
+        menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12'); // Morphs to 'X' close path
+    };
 
-    // Close open context menu frames instantly when link coordinates hit click operations
+    // Primary click toggle handler
+    mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents immediate window click interference
+        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    // BUGFIX 1: Force auto-close instantly when any navigation link option is selected
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            if (!mobileDropdown.classList.contains('hidden')) {
-                toggleMenu();
-            }
+            closeMenu();
         });
+    });
+
+    // BUGFIX 2: Listen globally across the viewport context window layout 
+    window.addEventListener('click', (event) => {
+        const isMenuOpen = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+        
+        // If menu is open, and user clicks elements that aren't the menu or the toggle button, shut it down
+        if (isMenuOpen && !mobileDropdown.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+            closeMenu();
+        }
     });
 }
 
